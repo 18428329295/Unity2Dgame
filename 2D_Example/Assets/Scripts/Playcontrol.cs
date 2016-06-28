@@ -22,6 +22,7 @@ public class Playcontrol : MonoBehaviour {
     {
         mGroudCheck = transform.Find("GroundCheck");
         Herobody = GetComponent<Rigidbody2D>();
+        anim = transform.root.gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -37,6 +38,7 @@ public class Playcontrol : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         float fInput = Input.GetAxis("Horizontal");
+        anim.SetFloat("speed", Mathf.Abs(fInput));
         if((fInput*Herobody.velocity.x)<MaxSpeed)
         {
             Herobody.AddForce(Vector2.right * fInput * MoveForce);
@@ -57,7 +59,9 @@ public class Playcontrol : MonoBehaviour {
         {
           //  int i = Random.Range(0, JumpClips.Length);
           //  AudioSource.PlayClipAtPoint(JumpClips[i], transform.position);
+
             Herobody.AddForce(new Vector2(0f, JumpForce));
+            anim.SetTrigger("jump");
             heroJump = false;
         }
 	}
