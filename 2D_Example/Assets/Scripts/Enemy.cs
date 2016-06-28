@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour {
     public float moveSpeed = 2f;
     public float HP = 1;
     private int ForceDirection = 1;
-   // public Sprite deadEnemy;
+    public GameObject deadEnemy;
 
     private Rigidbody2D monster;
 
@@ -44,7 +44,9 @@ public class Enemy : MonoBehaviour {
     
     void Death()
     {
-        Debug.Log("123");
+       // Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0, 360)));
+        Instantiate(deadEnemy, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
     public void Blood()
     {
